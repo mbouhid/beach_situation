@@ -25,18 +25,18 @@ def get_weather(lat, lon):
     doc = response.json()
 
     df_raw = {
-        'beach_name':         doc['location']['name'],
-        'region':             doc['location']['region'],
-        'country':            doc['location']['country'],
-        'lat':                doc['location']['lat'],
-        'lon':                doc['location']['lon'],
+        'Nome da Praia':                doc['location']['name'],
+        'Região':                       doc['location']['region'],
+        'País':                         doc['location']['country'],
+        'Latitude':                     doc['location']['lat'],
+        'Longitude':                    doc['location']['lon'],
         
-        'temp_c':             doc['current']['temp_c'],
-        'wind_kph':           doc['current']['wind_kph'],
-        'uv':                 doc['current']['uv'],
-        'last_updated':       doc['current']['last_updated'],
+        'Temperatura (ºC)':             doc['current']['temp_c'],
+        'Velocidade do Vento (km/h)':   doc['current']['wind_kph'],
+        'Raios UV':                     doc['current']['uv'],
+        'Última Atualização':           doc['current']['last_updated'],
         
-        'condition':          doc['current']['condition']['text']
+        'Condição Climática':           doc['current']['condition']['text']
 
 
     }
