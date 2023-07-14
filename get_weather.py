@@ -4,7 +4,7 @@ import pandas as pd
 
 
 #def get_weather():
-def get_weather(lat, lon):
+def get_weather(beach_name, lat, lon):
 
     url = "https://weatherapi-com.p.rapidapi.com/current.json"
 
@@ -25,18 +25,20 @@ def get_weather(lat, lon):
     doc = response.json()
 
     df_raw = {
-        'Nome da Praia':                doc['location']['name'],
-        'Região':                       doc['location']['region'],
-        'País':                         doc['location']['country'],
-        'Latitude':                     doc['location']['lat'],
-        'Longitude':                    doc['location']['lon'],
+        'Nome da Praia':                str(beach_name),
+        'Cidade':                       str(doc['location']['name']),
+        'Região':                       str(doc['location']['region']),
+        'País':                         str(doc['location']['country']),
+        'latitude':                     float(doc['location']['lat']),
+        'longitude':                    float(doc['location']['lon']),
         
-        'Temperatura (ºC)':             doc['current']['temp_c'],
-        'Velocidade do Vento (km/h)':   doc['current']['wind_kph'],
+        'Temperatura (ºC)':             float(doc['current']['temp_c']),
+        'Velocidade do Vento (km/h)':   float(doc['current']['wind_kph']),
         'Raios UV':                     doc['current']['uv'],
         'Última Atualização':           doc['current']['last_updated'],
         
-        'Condição Climática':           doc['current']['condition']['text']
+        'Condição Climática':           str(doc['current']['condition']['text']),
+        'Code':                         int(doc['current']['condition']['code'])
 
 
     }
