@@ -1,7 +1,0 @@
-2023-07-13 16:31:36.143
-
-Serialization of dataframe to Arrow table was unsuccessful due to:
-("Expected bytes, got a 'float' object",
-'Conversion failed for column 0 with type object').
-Applying automatic fixes for column types to make the dataframe
-Arrow-compatible.
