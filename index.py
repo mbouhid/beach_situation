@@ -64,76 +64,35 @@ st.table(busca_dados)
 
 st.sidebar.write("---")
 
-# with st.container():
-#     mapa = st.map(
-#             result,
-#             use_container_width=True
-#             )
-#     for i, row in result.iterrows():
-#         info = f"Nome: {row['Nome da Praia']}" \
-#                f"Região: {row['Região']}" \
-#                f"Temperatura (ºC): {row['Temperatura (ºC)']}" \
-#                f"Velocidade do Vento (km/h): {row['Velocidade do Vento (km/h)']}" \
-#                f"Condição Climática: {row['Condição Climática']}" 
-#         mapa.marker(row['latitude'], row['longitude'], info)
-# #        mapa.add_layer(st.markdown(info, unsafe_allow_html=True).location(row['latitude'], row['longitude']))
+with st.container():
+
+    result = pd.DataFrame.from_dict([busca_dados])
+    result.set_index('Code', inplace=True)
 
 
-result = pd.DataFrame.from_dict([busca_dados])
-result.set_index('Code', inplace=True)
-# fixed_result = pa.Table.from_pandas(result, preserve_index=False).to_pandas()
-# fixed_result.set_index('Nome da Praia', inplace=True)
-
-st.write(result.dtypes)
-
-# fig = go.Figure(data=go.Scattermapbox(
-#     lat=result['latitude'],
-#     lon=result['longitude'],
-#     mode='markers',
-#     marker=dict(size=9),
-#     hovertemplate="<b>%{text}</b><br>" +
-#                   "Região: %{customdata[0]}<br>" +
-#                   "Temperatura (ºC): %{customdata[1]}<br>" +
-#                   "Velocidade do Vento (km/h): %{customdata[2]}<br>" +
-#                   "Condição Climática: %{customdata[3]}"
-# ))
-
-# fig.update_layout(
-#     mapbox_style="open-street-map",
-#     margin={"r": 0, "t": 0, "l": 0, "b": 0},
-# )
-
-# fig.update_traces(
-#     text=result.index,
-#     customdata=result[['Região', 'Temperatura (ºC)', 'Velocidade do Vento (km/h)', 'Condição Climática']].values
-# )
-
-# st.plotly_chart(fig)
-
-
-fig = px.scatter_mapbox(
-    #fixed_result,
-    result,
-    hover_name="Nome da Praia",
-    hover_data={
-        "Nome da Praia": True,
-        "Região": True,
-        "Temperatura (ºC)": True,
-        "Velocidade do Vento (km/h)": True,
-        "Condição Climática": True,
-    },
-    zoom=14,
-    lat="latitude",
-    lon="longitude"
-)
-fig.update_traces(
-    marker=dict(
-        size=12,
-        color="red"
+    fig = px.scatter_mapbox(
+        #fixed_result,
+        result,
+        hover_name="Nome da Praia",
+        hover_data={
+            "Nome da Praia": True,
+            "Região": True,
+            "Temperatura (ºC)": True,
+            "Velocidade do Vento (km/h)": True,
+            "Condição Climática": True,
+        },
+        zoom=14,
+        lat="latitude",
+        lon="longitude"
     )
-)
+    fig.update_traces(
+        marker=dict(
+            size=12,
+            color="red"
+        )
+    )
 
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-st.plotly_chart(fig)
+    st.plotly_chart(fig)
