@@ -4,7 +4,7 @@ import calendar
 import pandas as pd
 from PIL import Image
 import streamlit as st
-from get_weather import get_weather
+from data.get_weather import get_weather
 
 
 # Tab Title
